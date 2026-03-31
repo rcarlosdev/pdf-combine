@@ -6,6 +6,7 @@ import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
+from pdf_combine import DEVELOPER_EMAIL, DEVELOPER_HANDLE, DEVELOPER_NAME
 from pdf_combine.models import (
     CombineRequest,
     CombineResult,
@@ -163,6 +164,13 @@ class PdfCombineWindow:
             ),
             wraplength=710,
         ).grid(row=0, column=0, sticky="w")
+        ttk.Label(
+            help_box,
+            text=(
+                f"Desarrollado por {DEVELOPER_NAME} | {DEVELOPER_HANDLE} | {DEVELOPER_EMAIL}"
+            ),
+            wraplength=710,
+        ).grid(row=1, column=0, sticky="w", pady=(10, 0))
 
         self.loader_frame = ttk.Frame(self.root, padding=(16, 0, 16, 8))
         self.loader_frame.grid(row=2, column=0, sticky="ew")

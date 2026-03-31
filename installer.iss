@@ -1,15 +1,18 @@
 #define MyAppName "PDFCombine"
 #define MyAppVersion "1.0.0"
-#define MyAppPublisher "PDFCombine"
+#define MyAppPublisher "Carlos Restrepo"
 #define MyAppExeName "PDFCombine.exe"
 #define MyAppSourceDir "."
 #define MyAppDataDirName "PDFCombine"
+#define MyAppDeveloperHandle "rcarlosdev"
+#define MyAppDeveloperEmail "restrepoacarlos@gmail.com"
 
 [Setup]
 AppId={{8D4B771E-99E9-4484-BFC2-8AE1E86C9D51}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+AppSupportURL=mailto:{#MyAppDeveloperEmail}
 DefaultDirName={autopf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
@@ -22,6 +25,10 @@ SolidCompression=yes
 WizardStyle=modern
 UninstallDisplayIcon={app}\{#MyAppExeName}
 ArchitecturesInstallIn64BitMode=x64compatible
+VersionInfoCompany={#MyAppPublisher}
+VersionInfoDescription={#MyAppName}
+VersionInfoProductName={#MyAppName}
+VersionInfoCopyright=Desarrollado por {#MyAppPublisher} ({#MyAppDeveloperHandle})
 
 [Languages]
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
