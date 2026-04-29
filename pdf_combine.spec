@@ -3,6 +3,8 @@
 from pathlib import Path
 import sys
 
+from PyInstaller.utils.hooks import collect_submodules
+
 project_dir = Path(SPECPATH)
 base_python_dir = Path(sys.base_prefix)
 
@@ -20,7 +22,14 @@ a = Analysis(
     pathex=[str(project_dir)],
     binaries=binaries,
     datas=datas,
-    hiddenimports=["tkinter", "tkinter.filedialog", "tkinter.messagebox", "tkinter.ttk"],
+    hiddenimports=[
+        "tkinter",
+        "tkinter.filedialog",
+        "tkinter.messagebox",
+        "tkinter.ttk",
+        "pypdf",
+        *collect_submodules("pypdf"),
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

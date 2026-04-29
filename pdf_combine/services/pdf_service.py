@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import importlib
 import math
 from dataclasses import dataclass
 from pathlib import Path
@@ -30,17 +29,17 @@ class PdfDependencyLoader:
 
     def refresh(self) -> bool:
         try:
-            pypdf_module = importlib.import_module("pypdf")
+            import pypdf
         except ImportError as exc:  # pragma: no cover - runtime path
             self._library = None
             self.import_error = exc
             return False
 
         self._library = PdfLibrary(
-            PdfReader=pypdf_module.PdfReader,
-            PdfWriter=pypdf_module.PdfWriter,
-            Transformation=pypdf_module.Transformation,
-            PageObject=pypdf_module.PageObject,
+            PdfReader=pypdf.PdfReader,
+            PdfWriter=pypdf.PdfWriter,
+            Transformation=pypdf.Transformation,
+            PageObject=pypdf.PageObject,
         )
         self.import_error = None
         return True
@@ -57,6 +56,14 @@ class PdfDependencyLoader:
 
     @staticmethod
     def install_hint() -> str:
+        if getattr(sys, "frozen", False):
+            return (
+                "No se encontro la libreria interna pypdf dentro de la aplicacion compilada.\n\n"
+                "Esto indica que el ejecutable o instalador fue generado sin incluir todas las dependencias.\n\n"
+                "Vuelve a compilar usando build_exe.ps1 o build_installer.ps1 despues de reinstalar "
+                "las dependencias del proyecto."
+            )
+
         return (
             "No se encontro la libreria pypdf en el Python que ejecuta esta app.\n\n"
             f"Python actual:\n{sys.executable}\n\n"
